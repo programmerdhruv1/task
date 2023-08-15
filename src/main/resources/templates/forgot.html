@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <title>Forgot</title>
+    <style>
+        /* Add your CSS styles here */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .link {
+            margin: 10px;
+        }
+        .login-form {
+            border: 1px solid #ccc;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        .form-group {
+            margin-bottom: 10px;
+        }
+        .form-group label {
+            display: block;
+            font-weight: bold;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+        .form-group button {
+            background-color: #333;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script th:inline="javascript" type="text/javascript">
+	/*<![CDATA[*/
+		var contextURL = /*[[@{/}]]*/'';
+		var HOST_URL = /*[[@{/}]]*/'';
+		/* var serverURL = window.location.origin; */
+	/*]]>*/
+	</script>
+</head>
+<body>
+<header>
+    <h1>Forgot</h1>
+</header>
+
+<div class="container">
+    <h2>Forgot Password</h2>
+    <div class="login-form">
+        <div id="step-1">
+            <form >
+                <span id="forgot-message" class="text-danger"style="color: red;"></span>
+                <br>
+                <div class="form-group mb-3">
+                    <label for="email">email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <button type="button" onclick="forgotEmail(this)">Check the email</button>
+                </div>
+            </form>
+        </div>
+
+        <div id="step-2" style="display: none;">
+            <form >
+                <span id="change-password-message" class="text-danger"style="color: red;"></span>
+                <br>
+                <input type="hidden" id="id" name="id" />
+                <div class="form-group mb-3">
+                    <label for="password">password:</label>
+                    <input type="password" id="password" name="passwordOne" required>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="password-new">verify password:</label>
+                    <input type="password" id="password-new" name="passwordTwo" required>
+                </div>
+                <div class="form-group">
+                    <button type="button" onclick="changePassword(this)">Change</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="link">
+            <a th:href="@{/login}">Login</a>
+        </div>
+    </div>
+</div>
+
+<script th:src="@{/signup.js}" />
+
+<script>
+
+    $(document).on('ready', function () {
+    console.log('init');
+    });
+</script>
+</body>
+</html>

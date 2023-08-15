@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <title>Task</title>
+    <style>
+        /* Add your CSS styles here */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .link {
+            margin: 10px;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script th:inline="javascript" type="text/javascript">
+	/*<![CDATA[*/
+		var contextURL = /*[[@{/}]]*/'';
+		var HOST_URL = /*[[@{/}]]*/'';
+		/* var serverURL = window.location.origin; */
+	/*]]>*/
+	</script>
+
+</head>
+<body>
+<header>
+    <h1>Home Page</h1>
+</header>
+
+<div class="container" sec:authorize="isAuthenticated() == false">
+
+
+    <h2>Welcome </h2>
+    <p >Please log in or sign up to continue.</p>
+
+    <div class="link" >
+        <a th:href="@{/login}">Login</a>
+    </div>
+    <div class="link" >
+        <a th:href="@{/createUser}">Sign Up</a>
+    </div>
+    <div class="link" >
+        <a th:href="@{/forgot}">Forgot Password</a>
+    </div>
+</div>
+
+<div class="container" sec:authorize="isAuthenticated() == true">
+
+
+    <h2>Welcome [[${user.firstName}]] [[${user.lastName}]] </h2>
+
+        <div class="link">
+            <a th:href="@{/profile}">Update Profile</a>
+        </div>
+
+        <div class="link">
+            <a th:href="@{/logout}">Logout</a>
+        </div>
+
+    </div>
+
+
+</div>
+
+<script>
+
+    $(document).on('ready', function () {
+    console.log('init');
+    });
+</script>
+
+</body>
+</html>

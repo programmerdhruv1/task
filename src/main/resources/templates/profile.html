@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <title>Profile</title>
+    <style>
+        /* Add your CSS styles here */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .link {
+            margin: 10px;
+        }
+        .login-form {
+            border: 1px solid #ccc;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        .form-group {
+            margin-bottom: 10px;
+        }
+        .form-group label {
+            display: block;
+            font-weight: bold;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+        .form-group button {
+            background-color: #333;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <script th:inline="javascript" type="text/javascript">
+	/*<![CDATA[*/
+		var contextURL = /*[[@{/}]]*/'';
+		var HOST_URL = /*[[@{/}]]*/'';
+		/* var serverURL = window.location.origin; */
+	/*]]>*/
+	</script>
+</head>
+<body>
+<header>
+    <h1>Profile</h1>
+</header>
+
+<div class="container">
+    <h2>Profile</h2>
+    <div class="register-form">
+        <form th:object="${user}">
+            <span id="register-message" class="text-danger" style="color: red;"></span>
+            <br>
+            <input type="hidden" th:field="*{id}">
+            <div class="form-group mb-3">
+                <label for="first_name">first name:</label>
+                <input type="text" id="first_name" name="firstName" th:th:value="*{firstName}" required>
+            </div>
+            <div class="form-group">
+                <label for="last_name">last name:</label>
+                <input type="text" id="last_name" name="lastName" th:value="*{lastName}" required>
+            </div>
+            <div class="form-group">
+                <label for="phone_number">phone number:</label>
+                <input type="number" id="phone_number" name="number" th:value="*{number}" required>
+            </div>
+            <div class="form-group">
+                <label for="email">email:</label>
+                <input type="email" id="email" name="email" th:value="*{email}" required>
+            </div>
+            <div class="form-group">
+                <label for="age">age:</label>
+                <input type="number" id="age" name="age" th:value="*{age}" required>
+            </div>
+            <div class="form-group">
+                <label for="gender">Gender:</label>
+                <select class="form-control" id="gender" name="gender" required>
+                    <option value="" th:selected="*{gender == null}">Select</option>
+                    <option value="male" th:selected="*{gender == 'male'}">Male</option>
+                    <option value="female" th:selected="*{gender == 'female'}">Female</option>
+                    <option value="other" th:selected="*{gender == 'other'}">Other</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="username">address:</label>
+                <input type="text" id="address" name="address" th:value="*{address}" required>
+            </div>
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" th:value="*{username}" required>
+            </div>
+            <div class="form-group">
+                <button type="button" onclick="updateProfile(this)">Update</button>
+            </div>
+        </form>
+        <div class="link">
+            <a th:href="@{/}">Home</a>
+        </div>
+        <div class="link">
+            <a th:href="@{/logout}">Logout</a>
+        </div>
+    </div>
+</div>
+
+<script th:src="@{/signup.js}" />
+
+<script>
+
+    $(document).on('ready', function () {
+        console.log('init');
+    });
+</script>
+
+</body>
+</html>
